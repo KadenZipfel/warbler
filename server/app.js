@@ -8,7 +8,7 @@ const authRoutes = require('./routes/auth');
 const messagesRoutes = require('./routes/messages');
 const {loginRequired, ensureCorrectUser} = require('./middleware/auth');
 
-const PORT = 3000 || process.env.PORT;
+const PORT = 8081 || process.env.PORT;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -43,5 +43,5 @@ app.use((req, res, next) => {
 app.use(errorHandler);
 
 app.listen(PORT, () => {
-  console.log('Server is listening.');
+  console.log(`Server is listening on ${PORT}`);
 });

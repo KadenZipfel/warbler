@@ -1,7 +1,7 @@
 const db = require('../models');
 const jwt = require('jsonwebtoken');
 
-exports.signin = async () => {
+exports.signin = async function(req, res, next) {
   try {
     let user = await db.User.findOne({
       email: req.body.email
@@ -14,7 +14,7 @@ exports.signin = async () => {
         username,
         profileImageUrl
       }, process.env.SECRET_KEY);
-      return releaseEvents.status(200).json({
+      return res.status(200).json({
         id,
         username,
         profileImageUrl,
@@ -34,7 +34,7 @@ exports.signin = async () => {
   }
 };
 
-exports.signup = async (req, res, next) => {
+exports.signup = async function(req, res, next) {
   try {
     let user = await db.User.create(req.body);
     let {id, username, profileImageUrl} = user;

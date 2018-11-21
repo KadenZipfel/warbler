@@ -58,3 +58,14 @@ ul.nav.navbar-nav li {
   color: white;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
+
+#messages .list-group-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 7px 20px 12px;
+  transition: all .3s;
+}
+
+#messages:not(.no-hover) .list-group-item:hover {
+  background-color: #e6ecf0;
+}

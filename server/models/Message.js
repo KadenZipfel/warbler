@@ -1,6 +1,8 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+const User = require("./user");
 
-const messageSchema = new mongoose.Schema({
+const messageSchema = new mongoose.Schema(
+  {
     text: {
       type: String,
       required: true,
@@ -8,23 +10,24 @@ const messageSchema = new mongoose.Schema({
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
-    },
+      ref: "User"
+    }
   },
   {
     timestamps: true
-});
+  }
+);
 
-messageSchema.pre('remove', async function(next) {
+messageSchema.pre("remove", async function(next) {
   try {
     let user = await User.findById(this.user);
     user.messages.remove(this.id);
     await user.save();
     return next();
-  } catch(err) {
+  } catch (err) {
     return next(err);
   }
 });
 
-const Message = mongoose.model('Message', messageSchema);
+const Message = mongoose.model("Message", messageSchema);
 module.exports = Message;
